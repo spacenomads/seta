@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>SETA: ics generator.</title>
+	<link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body class="app">
+	<main class="app__main">
+		<section class="app__data">
+			<div class="app__wrapper">
+				<h1 class="app__title">ICS generator</h1>
+				<form action="" class="form">
+					<div class="form__row">
+						<label for="telegramInput" class="form__label">Telegram message</label>
+						<textarea name="telegramInput" id="telegramInput" class="form__field form__textarea js__telegramInput"></textarea>
+					</div>
+
+					<div class="form__row form__actions">
+						<ul class="actions">
+							<li class="action">
+								<button class="button" type="button">Generar</button>
+							</li>
+						</ul>
+					</div>
+				</form>
+			</div>
+		</section>
+		<section class="app__downloads">
+			<div class="app__wrapper">
+				<h2 class="app__downloads-title">Descarga los eventos</h2>
+				<ul class="app__download-items js__ics-list"></ul>
+			</div>
+		</section>
+	</main>
+	<script src="assets/js/app.js" type="module"></script>
+	</body>
+</html>
