@@ -17,7 +17,7 @@ const MONTHS = {
 	'septiembre': '09',
 	'octubre': '10',
 	'noviembre': '11',
-	'diciembre': '12',
+	'diciembre': '12'
 };
 const SENTENCE = /(["'])(?:(?=(\\?))\2.)*?\1/g;
 

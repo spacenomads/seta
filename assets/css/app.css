@@ -20,6 +20,27 @@
 
 
 
+/* LAYOUT */
+.app__main {}
+
+.app__wrapper {}
+
+.app__section {}
+
+
+.app__event {
+	margin: 1.5em 0 3em;
+}
+.app__event-code {
+	display: block;
+	border: 2px solid red;
+	padding: 5px 20px;
+}
+
+
+
+
+
 /* FORM */
 .form {
 
