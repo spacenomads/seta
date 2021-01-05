@@ -1,6 +1,59 @@
+/* GENERAL */
 .app {
 	margin: 0;
 }
-.app__wrapper	{
+
+.app__wrapper {
 	margin: 0 2em;
+}
+
+
+
+
+
+/* BUTTONS */
+.button {
+
+}
+
+
+
+
+
+/* FORM */
+.form {
+
+}
+
+.form__row {
+
+}
+
+.form__label {
+
+}
+
+.form__field {
+
+}
+
+.form__textarea {
+
+}
+
+.form__button {
+
+}
+
+
+
+
+
+/* CALENDAR */
+.app__calendar {
+	display: none;
+}
+
+.app__calendar--visible {
+	display: block;
 }

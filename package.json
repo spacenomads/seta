@@ -1,0 +1,25 @@
+{
+  "name": "seta",
+  "version": "1.0.0",
+  "description": "Mini application to generate book club \"ics\" files from a Telegram message.",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spacenomads/seta.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/spacenomads/seta/issues"
+  },
+  "homepage": "https://github.com/spacenomads/seta#readme",
+  "devDependencies": {
+    "stylelint": "^13.8.0",
+    "stylelint-config-standard": "^20.0.0",
+    "stylelint-scss": "^3.18.0"
+  }
+}
