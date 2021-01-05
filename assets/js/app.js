@@ -1,46 +1,68 @@
-import {YEAR, CALENDARFILENAME, MONTHS, TSTART, TEND, SENTENCE} from './vars.js';
+import {YEAR, CALENDARFILENAME, MONTHS, TSTART, TEND} from './vars.js';
 import {getCalendar, getMonth} from './calendar.js';
+import {getEvents} from './event.js';
+import {isAndroid} from './android.js';
 
 const app = document.querySelector('.app');
 const createBtn = app.querySelector('.js__create-calendar');
 const icsBlock = app.querySelector('.js__ics');
-const icsButton = icsBlock.querySelector('.js__ics-button');
-const telegramInput = document.querySelector('.js__telegramInput');
+const icsActions = icsBlock.querySelector('.js__ics-actions');
+const telegramInput = app.querySelector('.js__telegramInput');
+const icsCode = app.querySelector('.js__ics-code');
+const icsMonth = app.querySelector('.js__ics-month');
 
 
 
 
 
-function getDay(str) {
-	let messageDay = str.trim().split(' ')[0];
-
-	if (messageDay.length === 1) {
-		messageDay = `0${messageDay}`;
+function getPropertyName(obj, value) {
+	let result = 'enero';
+	for (const key in obj) {
+		if (obj[key] === value) result = key;
 	}
-	return messageDay;
+
+	return result;
 }
 
 
 
 
 
-function getTitle(str) {
-	return str.match(SENTENCE).toString().replace(/["]/g, '');
+function createAction(el, uri, label, download) {
+	const actionItem = document.createElement('li');
+	actionItem.classList.add('app__calendar-action');
+
+	const downloadLink = document.createElement('a');
+	const downloadLinkText = document.createTextNode(label);
+	downloadLink.href = uri;
+	downloadLink.appendChild(downloadLinkText);
+
+	!download && downloadLink.setAttribute('target', '_blank');
+	download && downloadLink.setAttribute('download', `${CALENDARFILENAME}.ics`);
+	actionItem.appendChild(downloadLink);
+	el.appendChild(actionItem);
+}
+
+
+
+
+function showCalendarBlock(uri, month) {
+
+	createAction(icsActions, uri, 'Abrir', false);
+	createAction(icsActions, uri, 'Descargar', true);
+
+	icsBlock.classList.add('app__calendar--visible');
+	icsMonth.innerText = getPropertyName(MONTHS, month);
 }
 
 
 
 
 
-function getEvents(str) {
-	const message = str.split(':')[1].trim().split(',');
-
-	return message.map(event => {
-		const title = getTitle(event);
-		const day = getDay(event);
-		return {day, title};
-	});
+function showCalendarCode(data) {
+	icsCode.innerHTML = data;
 }
+
 
 
 
@@ -52,30 +74,19 @@ function createCalendar() {
 	const month = getMonth(message, MONTHS);
 	const calendarData = getEvents(message).map(event => {
 		const {day, title} = event;
+		const strDay = day > 9 ? day : '0' + day;
 
-		const tStart = `${YEAR}${month}${day}${TSTART}`;
-		const tEnd = `${YEAR}${month}${day}${TEND}`;
+		const tStart = `${YEAR}${month}${strDay}${TSTART}`;
+		const tEnd = `${YEAR}${month}${strDay}${TEND}`;
 
 		return {title, tStart, tEnd, vAlarm };
 	});
 
-	const setaCalendar = encodeURIComponent(getCalendar(calendarData));
-	const ICSTESTFILE = `data:text/calendar;charset=utf-8,${setaCalendar}` ;
+	const setaCalendar = getCalendar(calendarData);
+	const ICSTESTFILE = `data:text/calendar;charset=utf-8,${encodeURIComponent(setaCalendar)}` ;
 
-
-
-
-
-	showCalendarBlock(ICSTESTFILE);
-}
-
-
-
-
-
-function showCalendarBlock(uri) {
-	icsButton.innerHTML =`<a href="${uri}" target="_blank" data-download="${CALENDARFILENAME}.ics">Descarga el calendario de este mes</a>`;
-	icsBlock.classList.add('app__calendar--visible');
+	showCalendarBlock(ICSTESTFILE, month);
+	showCalendarCode(setaCalendar);
 }
 
 
@@ -83,3 +94,9 @@ function showCalendarBlock(uri) {
 
 
 createBtn.addEventListener('click', createCalendar);
+
+
+
+
+
+export {getEvents};

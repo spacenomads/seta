@@ -8,9 +8,10 @@
 </head>
 <body class="app">
 	<main class="app__main">
-		<section class="app__data">
+
+		<section class="app__section app__data">
 			<div class="app__wrapper">
-				<h1 class="app__title">Generador de calendario v0.2.0</h1>
+				<h1 class="app__title">Generador de calendario v0.5.0</h1>
 				<form action="" class="form">
 					<div class="form__row">
 						<label for="telegramInput" class="form__label">Mensaje de telegram</label>
@@ -18,8 +19,8 @@
 					</div>
 
 					<div class="form__row form__actions">
-						<ul class="actions">
-							<li class="action">
+						<ul class="app__form-actions">
+							<li class="app__form-action">
 								<button class="button js__create-calendar" type="button">Generar</button>
 							</li>
 						</ul>
@@ -27,10 +28,17 @@
 				</form>
 			</div>
 		</section>
-		<section class="app__calendar js__ics">
+		<section class="app__section app__calendar js__ics">
 			<div class="app__wrapper">
-				<h2 class="app__calendar-title">Calendario de {*MES*}</h2>
-				<div class="app__calendar-btn js__ics-button"></div>
+				<h2 class="app__calendar-title">Calendario de <span class="js__ics-month">{*MES*}</span></h2>
+				<ul class="app__calendar-actions js__ics-actions"></ul>
+			</div>
+		</section>
+		<section class="app__section app__event">
+			<div class="app__wrapper">
+				<code class="app__event-code">
+					<pre class="js__ics-code"></pre>
+				</code>
 			</div>
 		</section>
 	</main>

@@ -4,7 +4,7 @@ const YEAR = new Date().getFullYear();
 const TZID = 'Europe/Madrid';
 const TSTART = 'T213000';
 const TEND = 'T230000';
-const CALENDARFILENAME = 'calendario-seta';
+const CALENDARFILENAME = 'videoclub-de-lectura';
 const MONTHS = {
 	'enero': '01',
 	'febrero': '02',
@@ -17,7 +17,7 @@ const MONTHS = {
 	'septiembre': '09',
 	'octubre': '10',
 	'noviembre': '11',
-	'diciembre': '12',
+	'diciembre': '12'
 };
 const SENTENCE = /(["'])(?:(?=(\\?))\2.)*?\1/g;
 
