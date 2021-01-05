@@ -46,8 +46,9 @@ function createAction(el, uri, label, download) {
 
 
 
-function showCalendarBlock(uri, month) {
 
+function showCalendarBlock(uri, month) {
+	icsActions.innerHTML = '';
 	createAction(icsActions, uri, 'Abrir', false);
 	createAction(icsActions, uri, 'Descargar', true);
 
