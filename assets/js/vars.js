@@ -4,7 +4,7 @@ const YEAR = new Date().getFullYear();
 const TZID = 'Europe/Madrid';
 const TSTART = 'T213000';
 const TEND = 'T230000';
-const CALENDARFILENAME = 'calendario-seta';
+const CALENDARFILENAME = 'videoclub-de-lectura';
 const MONTHS = {
 	'enero': '01',
 	'febrero': '02',
