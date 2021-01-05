@@ -74,7 +74,7 @@ function createCalendar() {
 
 
 function showCalendarBlock(uri) {
-	icsButton.innerHTML =`<a href="${uri}" download="${CALENDARFILENAME}.ics">Descarga el calendario de este mes</a>`;
+	icsButton.innerHTML =`<a href="${uri}" target="_blank" data-download="${CALENDARFILENAME}.ics">Descarga el calendario de este mes</a>`;
 	icsBlock.classList.add('app__calendar--visible');
 }
 
