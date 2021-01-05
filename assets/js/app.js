@@ -1,6 +1,7 @@
 import {YEAR, CALENDARFILENAME, MONTHS, TSTART, TEND} from './vars.js';
 import {getCalendar, getMonth} from './calendar.js';
 import {getEvents} from './event.js';
+import {isAndroid} from './android.js';
 
 const app = document.querySelector('.app');
 const createBtn = app.querySelector('.js__create-calendar');
@@ -8,14 +9,24 @@ const icsBlock = app.querySelector('.js__ics');
 const icsButton = icsBlock.querySelector('.js__ics-button');
 const telegramInput = app.querySelector('.js__telegramInput');
 const icsCode = app.querySelector('.js__ics-code');
+const icsMonth = app.querySelector('.js__ics-month');
 
 
 
 
 
-function showCalendarBlock(uri) {
-	icsButton.innerHTML =`<a href="${uri}" target="_blank" download="${CALENDARFILENAME}.ics">Descarga el calendario de este mes</a>`;
+function showCalendarBlock(uri, month) {
+	const downloadLink = document.createElement('a');
+	const downloadLinkText = document.createTextNode('Descarga el calendario de este mes');
+	downloadLink.href = uri;
+	downloadLink.appendChild(downloadLinkText);
+
+	isAndroid && downloadLink.setAttribute('target', '_blank');
+	!isAndroid && downloadLink.setAttribute('download', `${CALENDARFILENAME}.ics`);
+
+	icsButton.appendChild(downloadLink);
 	icsBlock.classList.add('app__calendar--visible');
+	icsMonth.innerText = 'enero';
 }
 
 
@@ -48,7 +59,7 @@ function createCalendar() {
 
 
 
-	showCalendarBlock(ICSTESTFILE);
+	showCalendarBlock(ICSTESTFILE, month);
 	showCalendarCode(setaCalendar);
 }
 
