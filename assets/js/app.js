@@ -1,73 +1,13 @@
-import {YEAR, CALENDARFILENAME, MONTHS, TSTART, TEND, SENTENCE} from './vars.js';
+import {YEAR, CALENDARFILENAME, MONTHS, TSTART, TEND} from './vars.js';
 import {getCalendar, getMonth} from './calendar.js';
+import {getEvents} from './event.js';
 
 const app = document.querySelector('.app');
 const createBtn = app.querySelector('.js__create-calendar');
 const icsBlock = app.querySelector('.js__ics');
 const icsButton = icsBlock.querySelector('.js__ics-button');
-const telegramInput = document.querySelector('.js__telegramInput');
-
-
-
-
-
-function getDay(str) {
-	let messageDay = str.trim().split(' ')[0];
-
-	if (messageDay.length === 1) {
-		messageDay = `0${messageDay}`;
-	}
-	return messageDay;
-}
-
-
-
-
-
-function getTitle(str) {
-	return str.match(SENTENCE).toString().replace(/["]/g, '');
-}
-
-
-
-
-
-function getEvents(str) {
-	const message = str.split(':')[1].trim().split(',');
-
-	return message.map(event => {
-		const title = getTitle(event);
-		const day = getDay(event);
-		return {day, title};
-	});
-}
-
-
-
-
-function createCalendar() {
-	const vAlarm = '15';
-	const message = telegramInput.value;
-
-	const month = getMonth(message, MONTHS);
-	const calendarData = getEvents(message).map(event => {
-		const {day, title} = event;
-
-		const tStart = `${YEAR}${month}${day}${TSTART}`;
-		const tEnd = `${YEAR}${month}${day}${TEND}`;
-
-		return {title, tStart, tEnd, vAlarm };
-	});
-
-	const setaCalendar = encodeURIComponent(getCalendar(calendarData));
-	const ICSTESTFILE = `data:text/calendar;charset=utf-8,${setaCalendar}` ;
-
-
-
-
-
-	showCalendarBlock(ICSTESTFILE);
-}
+const telegramInput = app.querySelector('.js__telegramInput');
+const icsCode = app.querySelector('.js__ics-code');
 
 
 
@@ -82,4 +22,43 @@ function showCalendarBlock(uri) {
 
 
 
+function showCalendarCode(data) {
+	icsCode.innerHTML = data;
+}
+
+
+
+function createCalendar() {
+	const vAlarm = '15';
+	const message = telegramInput.value;
+
+	const month = getMonth(message, MONTHS);
+	const calendarData = getEvents(message).map(event => {
+		const {day, title} = event;
+		const strDay = day > 9 ? day : '0' + day;
+
+		const tStart = `${YEAR}${month}${strDay}${TSTART}`;
+		const tEnd = `${YEAR}${month}${strDay}${TEND}`;
+
+		return {title, tStart, tEnd, vAlarm };
+	});
+
+	const setaCalendar = getCalendar(calendarData);
+	showCalendarCode(setaCalendar);
+	const ICSTESTFILE = `data:text/calendar;charset=utf-8,${encodeURIComponent(setaCalendar)}` ;
+
+
+
+
+
+	showCalendarBlock(ICSTESTFILE);
+}
+
+
+
+
+
 createBtn.addEventListener('click', createCalendar);
+
+
+export {getEvents};

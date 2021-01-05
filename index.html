@@ -8,7 +8,8 @@
 </head>
 <body class="app">
 	<main class="app__main">
-		<section class="app__data">
+
+		<section class="app__section app__data">
 			<div class="app__wrapper">
 				<h1 class="app__title">Generador de calendario v0.2.0</h1>
 				<form action="" class="form">
@@ -27,10 +28,17 @@
 				</form>
 			</div>
 		</section>
-		<section class="app__calendar js__ics">
+		<section class="app__section app__calendar js__ics">
 			<div class="app__wrapper">
 				<h2 class="app__calendar-title">Calendario de {*MES*}</h2>
 				<div class="app__calendar-btn js__ics-button"></div>
+			</div>
+		</section>
+		<section class="app__section app__event">
+			<div class="app__wrapper">
+				<code class="app__event-code">
+					<pre class="js__ics-code"></pre>
+				</code>
 			</div>
 		</section>
 	</main>
