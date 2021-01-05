@@ -2,6 +2,8 @@ const NEWLINE = '\n';
 //const NEWLINE = (navigator.appVersion.indexOf('Win') !== -1) ? '\r\n' : '\n';
 const YEAR = new Date().getFullYear();
 const TZID = 'Europe/Madrid';
+const TSTART = 'T213000';
+const TEND = 'T230000';
 const CALENDARFILENAME = 'calendario-seta';
 const MONTHS = {
 	'enero': '01',
@@ -17,5 +19,6 @@ const MONTHS = {
 	'noviembre': '11',
 	'diciembre': '12',
 };
+const SENTENCE = /(["'])(?:(?=(\\?))\2.)*?\1/g;
 
-export {NEWLINE, YEAR, MONTHS, TZID, CALENDARFILENAME};
+export {NEWLINE, YEAR, MONTHS, TSTART, TEND, TZID, CALENDARFILENAME, SENTENCE};

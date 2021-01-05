@@ -38,7 +38,13 @@
 }
 
 .form__textarea {
-
+	display: block;
+	font: inherit;
+	font-size: 1.5em;
+	padding: .5em;
+	width: 80%;
+	min-width: 256px;
+	box-sizing: border-box;
 }
 
 .form__button {
