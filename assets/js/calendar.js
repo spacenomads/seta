@@ -5,6 +5,8 @@ function getCalendar(data) {
 	const calendarStart = [
 		'BEGIN:VCALENDAR',
 		'VERSION:2.0',
+		'NAME:NAME:Se(c)ta',
+		'COLOR:0:136:238',
 		'CALSCALE:GREGORIAN'
 	];
 
