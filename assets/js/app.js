@@ -14,7 +14,7 @@ const icsCode = app.querySelector('.js__ics-code');
 
 
 function showCalendarBlock(uri) {
-	icsButton.innerHTML =`<a href="${uri}" target="_blank" data-download="${CALENDARFILENAME}.ics">Descarga el calendario de este mes</a>`;
+	icsButton.innerHTML =`<a href="${uri}" target="_blank" download="${CALENDARFILENAME}.ics">Descarga el calendario de este mes</a>`;
 	icsBlock.classList.add('app__calendar--visible');
 }
 
@@ -44,14 +44,12 @@ function createCalendar() {
 	});
 
 	const setaCalendar = getCalendar(calendarData);
-	showCalendarCode(setaCalendar);
 	const ICSTESTFILE = `data:text/calendar;charset=utf-8,${encodeURIComponent(setaCalendar)}` ;
 
 
 
-
-
 	showCalendarBlock(ICSTESTFILE);
+	showCalendarCode(setaCalendar);
 }
 
 
