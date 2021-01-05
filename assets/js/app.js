@@ -6,7 +6,7 @@ import {isAndroid} from './android.js';
 const app = document.querySelector('.app');
 const createBtn = app.querySelector('.js__create-calendar');
 const icsBlock = app.querySelector('.js__ics');
-const icsButton = icsBlock.querySelector('.js__ics-button');
+const icsActions = icsBlock.querySelector('.js__ics-actions');
 const telegramInput = app.querySelector('.js__telegramInput');
 const icsCode = app.querySelector('.js__ics-code');
 const icsMonth = app.querySelector('.js__ics-month');
@@ -15,18 +15,44 @@ const icsMonth = app.querySelector('.js__ics-month');
 
 
 
-function showCalendarBlock(uri, month) {
+function getPropertyName(obj, value) {
+	let result = 'enero';
+	for (const key in obj) {
+		if (obj[key] === value) result = key;
+	}
+
+	return result;
+}
+
+
+
+
+
+function createAction(el, uri, label, download) {
+	const actionItem = document.createElement('li');
+	actionItem.classList.add('app__calendar-action');
+
 	const downloadLink = document.createElement('a');
-	const downloadLinkText = document.createTextNode('Descarga el calendario de este mes');
+	const downloadLinkText = document.createTextNode(label);
 	downloadLink.href = uri;
 	downloadLink.appendChild(downloadLinkText);
 
-	isAndroid && downloadLink.setAttribute('target', '_blank');
-	!isAndroid && downloadLink.setAttribute('download', `${CALENDARFILENAME}.ics`);
+	!download && downloadLink.setAttribute('target', '_blank');
+	download && downloadLink.setAttribute('download', `${CALENDARFILENAME}.ics`);
+	actionItem.appendChild(downloadLink);
+	el.appendChild(actionItem);
+}
 
-	icsButton.appendChild(downloadLink);
+
+
+
+function showCalendarBlock(uri, month) {
+
+	createAction(icsActions, uri, 'Abrir', false);
+	createAction(icsActions, uri, 'Descargar', true);
+
 	icsBlock.classList.add('app__calendar--visible');
-	icsMonth.innerText = 'enero';
+	icsMonth.innerText = getPropertyName(MONTHS, month);
 }
 
 
@@ -36,6 +62,8 @@ function showCalendarBlock(uri, month) {
 function showCalendarCode(data) {
 	icsCode.innerHTML = data;
 }
+
+
 
 
 
@@ -57,8 +85,6 @@ function createCalendar() {
 	const setaCalendar = getCalendar(calendarData);
 	const ICSTESTFILE = `data:text/calendar;charset=utf-8,${encodeURIComponent(setaCalendar)}` ;
 
-
-
 	showCalendarBlock(ICSTESTFILE, month);
 	showCalendarCode(setaCalendar);
 }
@@ -68,6 +94,9 @@ function createCalendar() {
 
 
 createBtn.addEventListener('click', createCalendar);
+
+
+
 
 
 export {getEvents};

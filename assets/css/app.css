@@ -1,5 +1,6 @@
 /* GENERAL */
 .app {
+	font-family: arial, sans-serif;
 	margin: 0;
 }
 
@@ -13,7 +14,16 @@
 
 /* BUTTONS */
 .button {
-
+	background: #08e;
+	border: 0;
+	border-radius: 10px;
+	color: white;
+	display: inline-block;
+	font: inherit;
+	font-weight: bold;
+	line-height: 100%;
+	padding: 10px 20px;
+	text-transform: uppercase;
 }
 
 
@@ -21,19 +31,13 @@
 
 
 /* LAYOUT */
-.app__main {}
-
-.app__wrapper {}
-
-.app__section {}
-
-
 .app__event {
 	margin: 1.5em 0 3em;
 }
+
 .app__event-code {
-	display: block;
 	border: 2px solid red;
+	display: block;
 	padding: 5px 20px;
 }
 
@@ -42,34 +46,30 @@
 
 
 /* FORM */
-.form {
-
-}
-
-.form__row {
-
+.form__row + .form__row {
+	margin-top: 2em;
 }
 
 .form__label {
-
+	font-weight: 600;
 }
 
-.form__field {
 
-}
 
 .form__textarea {
+	box-sizing: border-box;
 	display: block;
 	font: inherit;
 	font-size: 1.5em;
+	min-width: 256px;
 	padding: .5em;
 	width: 80%;
-	min-width: 256px;
-	box-sizing: border-box;
 }
 
-.form__button {
-
+.app__form-actions {
+	list-style: none;
+	margin: 0;
+	padding: 0;
 }
 
 
@@ -83,4 +83,16 @@
 
 .app__calendar--visible {
 	display: block;
+}
+
+.app__calendar-actions {
+	display: flex;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.app__calendar-action + .app__calendar-action::before {
+	content: '/';
+	padding: 0 .5em;
 }
