@@ -4,7 +4,17 @@ const YEAR = new Date().getFullYear();
 const TZID = 'Europe/Madrid';
 const TSTART = 'T213000';
 const TEND = 'T230000';
+const ALARM = '15';
 const CALENDARFILENAME = 'videoclub-de-lectura';
+const WEEK = [
+	'lunes',
+	'martes',
+	'miércoles',
+	'jueves',
+	'viernes',
+	'sábado',
+	'domingo'
+];
 const MONTHS = {
 	'enero': '01',
 	'febrero': '02',
@@ -21,4 +31,4 @@ const MONTHS = {
 };
 const SENTENCE = /(["'])(?:(?=(\\?))\2.)*?\1/g;
 
-export {NEWLINE, YEAR, MONTHS, TSTART, TEND, TZID, CALENDARFILENAME, SENTENCE};
+export {NEWLINE, YEAR, MONTHS, TSTART, TEND, TZID, CALENDARFILENAME, SENTENCE, WEEK, ALARM};
