@@ -1,12 +1,13 @@
-import {YEAR, CALENDARFILENAME, MONTHS, TSTART, TEND} from './vars.js';
-import {getCalendar, getMonth} from './calendar.js';
+import {YEAR, CALENDARFILENAME, MONTHS, TSTART, TEND, ALARM} from './vars.js';
+import {getCalendar, getCalendars, getMonth, getMonthName, getCalendarUri} from './calendar.js';
 import {getEvents} from './event.js';
 import {isAndroid} from './android.js';
 
 const app = document.querySelector('.app');
 const createBtn = app.querySelector('.js__create-calendar');
 const icsBlock = app.querySelector('.js__ics');
-const icsActions = icsBlock.querySelector('.js__ics-actions');
+const icsEvents = icsBlock.querySelector('.js__ics-events');
+const icsFullCalendar = icsBlock.querySelector('.js__ics-full-calendar');
 const telegramInput = app.querySelector('.js__telegramInput');
 const icsCode = app.querySelector('.js__ics-code');
 const icsMonth = app.querySelector('.js__ics-month');
@@ -15,45 +16,54 @@ const icsMonth = app.querySelector('.js__ics-month');
 
 
 
-function getPropertyName(obj, value) {
-	let result = 'enero';
-	for (const key in obj) {
-		if (obj[key] === value) result = key;
-	}
-
-	return result;
-}
-
-
-
-
-
-function createAction(el, uri, label, download) {
-	const actionItem = document.createElement('li');
-	actionItem.classList.add('app__calendar-action');
-
+function createFullLink(el, uri, label) {
+	el.innerHTML = '';
 	const downloadLink = document.createElement('a');
 	const downloadLinkText = document.createTextNode(label);
 	downloadLink.href = uri;
 	downloadLink.appendChild(downloadLinkText);
+	downloadLink.setAttribute('download', `${CALENDARFILENAME}.ics`);
+	el.appendChild(downloadLink);
+}
 
-	!download && downloadLink.setAttribute('target', '_blank');
-	download && downloadLink.setAttribute('download', `${CALENDARFILENAME}.ics`);
-	actionItem.appendChild(downloadLink);
-	el.appendChild(actionItem);
+
+
+
+function createItem(el, data) {
+	const {calendarUri, dow, day, title} =  data;
+	const item = `<li class="app__calendar-event">
+		<a href="${calendarUri}" class="app__calendar-event-link" download="${CALENDARFILENAME}-${day}.ics">
+			<span class="app__calendar-event-date">${dow} ${day}</span> <span class="app__calendar-event-title">${title}</span>
+		</a>
+	</li>`;
+
+	el.insertAdjacentHTML('beforeend', item);
 }
 
 
 
 
 
-function showCalendarBlock(uri, month) {
-	icsActions.innerHTML = '';
-	createAction(icsActions, uri, 'Abrir', false);
-	createAction(icsActions, uri, 'Descargar', true);
+function createEvents(el, calendar) {
+	el.innerHTML = '';
+	for (let i = 0; i < calendar.length; i++) {
+		const event = calendar[i];
+		createItem(el, event);
+	}
+}
+
+
+
+
+
+function showCalendarBlock(calendar, uri, month) {
+
+
+	createFullLink(icsFullCalendar, uri, 'Descargar calendario completo');
+	createEvents(icsEvents, calendar);
 
 	icsBlock.classList.add('app__calendar--visible');
-	icsMonth.innerText = getPropertyName(MONTHS, month);
+	icsMonth.innerText = getMonthName(MONTHS, month);
 }
 
 
@@ -69,7 +79,7 @@ function showCalendarCode(data) {
 
 
 function createCalendar() {
-	const vAlarm = '15';
+	const vAlarm = ALARM;
 	const message = telegramInput.value;
 
 	const month = getMonth(message, MONTHS);
@@ -80,14 +90,16 @@ function createCalendar() {
 		const tStart = `${YEAR}${month}${strDay}${TSTART}`;
 		const tEnd = `${YEAR}${month}${strDay}${TEND}`;
 
-		return {title, tStart, tEnd, vAlarm };
+		return {title, day, month: Number(month), year: YEAR, tStart, tEnd, vAlarm };
 	});
 
-	const setaCalendar = getCalendar(calendarData);
-	const ICSTESTFILE = `data:text/calendar;charset=utf-8,${encodeURIComponent(setaCalendar)}` ;
+	const setaFullCalendar = getCalendar(calendarData);
+	const setaCalendars = getCalendars(calendarData);
+	console.log(setaCalendars);
+	const icsFullSetaCalendar = getCalendarUri(setaFullCalendar) ;
 
-	showCalendarBlock(ICSTESTFILE, month);
-	showCalendarCode(setaCalendar);
+	showCalendarBlock(setaCalendars, icsFullSetaCalendar, month);
+	//showCalendarCode(setaFullCalendar);
 }
 
 

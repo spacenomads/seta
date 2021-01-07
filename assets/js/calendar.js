@@ -1,4 +1,28 @@
-import {NEWLINE, TZID} from './vars.js';
+import {NEWLINE, TZID, MONTHS, WEEK} from './vars.js';
+
+
+
+
+
+function getCalendarUri(cal) {
+	return `data:text/calendar;charset=utf-8,${encodeURIComponent(cal)}`;
+}
+
+
+
+
+function getMonthName(obj, value) {
+	let result = 'enero';
+	for (const key in obj) {
+		if (obj[key] === value) result = key;
+	}
+
+	return result;
+}
+
+
+
+
 
 function getCalendar(data) {
 
@@ -45,6 +69,27 @@ function getCalendar(data) {
 
 
 
+function getCalendars(data) {
+	return data.map(event => {
+		const {title, day, month, year} = event;
+		const fullMonth = getMonthName(MONTHS, month > 9 ? month : '0'+month);
+		const dow = WEEK[new Date(`${month} ${day}, ${year}`).getDay()];
+		return {
+			title,
+			day,
+			month,
+			year,
+			fullMonth,
+			dow,
+			calendarUri: getCalendarUri(getCalendar([event]))
+		};
+	});
+}
+
+
+
+
+
 function getMonth(str, dic) {
 	const parts = str.split(':');
 	const messageMonth = parts[0].toLowerCase();
@@ -56,4 +101,4 @@ function getMonth(str, dic) {
 
 
 
-export {getCalendar, getMonth};
+export {getCalendar, getCalendars, getMonth, getMonthName, getCalendarUri};
