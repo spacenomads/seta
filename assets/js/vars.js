@@ -7,13 +7,13 @@ const TEND = 'T230000';
 const ALARM = '15';
 const CALENDARFILENAME = 'videoclub-de-lectura';
 const WEEK = [
+	'domingo',
 	'lunes',
 	'martes',
 	'miércoles',
 	'jueves',
 	'viernes',
-	'sábado',
-	'domingo'
+	'sábado'
 ];
 const MONTHS = {
 	'enero': '01',

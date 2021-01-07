@@ -47,7 +47,6 @@ function createItem(el, data) {
 function createEvents(el, calendar) {
 	el.innerHTML = '';
 	for (let i = 0; i < calendar.length; i++) {
-		console.log(calendar.length, i);
 		const event = calendar[i];
 		createItem(el, event);
 	}
