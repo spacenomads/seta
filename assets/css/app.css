@@ -29,6 +29,11 @@
 
 
 
+.messages {display: none;}
+.message {}
+
+
+
 
 /* LAYOUT */
 .app__event {
