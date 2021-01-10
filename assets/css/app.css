@@ -14,7 +14,7 @@
 
 /* BUTTONS */
 .button {
-	background: #08e;
+	background: #0088ee;
 	border: 0;
 	border-radius: 10px;
 	color: white;
@@ -29,13 +29,17 @@
 
 
 
-.messages {display: none;}
-.message {}
+
+/* ANCHOR SAMPLES */
+.samples {
+	display: none;
+}
 
 
 
 
-/* LAYOUT */
+
+/* ANCHOR LAYOUT */
 .app__event {
 	margin: 1.5em 0 3em;
 }
@@ -50,25 +54,35 @@
 
 
 
-/* FORM */
-.form__row + .form__row {
+/* ANCHOR FORM */
+.form__group {
+	column-gap: 20px;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.form__row + .form__row,
+.form__row--actions {
 	margin-top: 2em;
+}
+
+.form__group .form__row + .form__row {
+	margin-top: 0;
 }
 
 .form__label {
 	font-weight: 600;
 }
 
-
-
 .form__textarea {
 	box-sizing: border-box;
 	display: block;
 	font: inherit;
-	font-size: 1.5em;
+	font-size: 1em;
+	height: 5em;
 	min-width: 256px;
 	padding: .5em;
-	width: 80%;
+	width: 100%;
 }
 
 .app__form-actions {
@@ -81,7 +95,7 @@
 
 
 
-/* CALENDAR */
+/* ANCHOR CALENDAR */
 .app__calendar {
 	display: none;
 }
