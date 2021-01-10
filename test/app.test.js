@@ -1,14 +1,17 @@
 /* eslint-disable no-undef */
-import {MONTHS} from '../assets/js/vars.js';
-import {getMonth} from '../assets/js/calendar.js';
-import {getEvents} from '../assets/js/event.js';
-import { expect } from '@jest/globals';
+import {SAMPLECONTENT} from '../assets/js/vars';
+import {initContent} from '../assets/js/sample.js';
+import {getEventsData, getMonthFromStrEvent, splitEvents} from '../assets/js/get-data.js';
+import {getTwoDigitNumber} from '../assets/js/helpers.js';
 
-describe('CALENDAR.js', () => {
-	test('Enero: 4 "Enola Holmes", 7 "Dash y Lily", 12 "COnviVIenDo 19 días", 14 "Tras esa montaña está la orilla", 19 "Drama", 21 "Quiero volver", 26 "Legally Blonde", 28 "Hijas de Lilith". is 01', () => {
-		const input = 'Enero: 4 "Enola Holmes", 7 "Dash y Lily", 12 "COnviVIenDo 19 días", 14 "Tras esa montaña está la orilla", 19 "Drama", 21 "Quiero volver", 26 "Legally Blonde", 28 "Hijas de Lilith".';
-		const result = '01';
-		expect(getMonth(input, MONTHS)).toBe(result);
+describe('SPAMPLES', () => {
+	test('Successfully add content to the container', () => {
+		const {solo: input, solo: result} = SAMPLECONTENT;
+		const obj = {
+			value: ''
+		};
+		initContent(obj, input);
+		expect(obj.value).toBe(result);
 	});
 });
 
@@ -16,24 +19,65 @@ describe('CALENDAR.js', () => {
 
 
 
-describe('APP.js', () => {
-	test('Message has  8 events.', () => {
-		const input = 'Enero: 4 "Enola Holmes", 7 "Dash y Lily", 12 "COnviVIenDo 19 días", 14 "Tras esa montaña está la orilla", 19 "Drama", 21 "Quiero volver", 26 "Legally Blonde", 28 "Hijas de Lilith".';
+describe('Helpers', () => {
+	test('Two digit string: 2 -> 02', () => {
+		const input = 2;
+		const result = '02';
+		expect(getTwoDigitNumber(input)).toBe(result);
+	});
+
+	test('Two digit string: 12 -> 12', () => {
+		const input = 12;
+		const result = '12';
+		expect(getTwoDigitNumber(input)).toBe(result);
+	});
+});
+
+
+
+
+
+describe('Get data from telegram post', () => {
+	test('Get month object {value: 0, label: "enero"}', () =>{
+		const {solo: input} = SAMPLECONTENT;
+		const result = {
+			value: 0,
+			label: 'enero'
+		};
+
+		expect(getMonthFromStrEvent(input)).toMatchObject(result);
+	});
+
+	test('January has 7 events', () =>{
+		const {solo: input} = SAMPLECONTENT;
 		const result = 8;
-		expect(getEvents(input).length).toBe(result);
+
+		expect(splitEvents(input).length).toBe(result);
 	});
 
-	test('Second event day is 7.', () => {
-		const input = 'Enero: 4 "Enola Holmes", 7 "Dash y Lily", 12 "COnviVIenDo 19 días", 14 "Tras esa montaña está la orilla", 19 "Drama", 21 "Quiero volver", 26 "Legally Blonde", 28 "Hijas de Lilith".';
-		const result = 7;
-		expect(getEvents(input)[1].day).toBe(result);
+	test('Result is an Array', () =>{
+		const {solo: input} = SAMPLECONTENT;
+		const result = true;
+
+		expect(Array.isArray(splitEvents(input))).toBe(result);
 	});
 
-	test('Any event (2nd) is an object{day, title}.', () => {
-		const input = 'Enero: 4 "Enola Holmes", 7 "Dash y Lily", 12 "COnviVIenDo 19 días", 14 "Tras esa montaña está la orilla", 19 "Drama", 21 "Quiero volver", 26 "Legally Blonde", 28 "Hijas de Lilith".';
-		expect(getEvents(input)[1]).toEqual(expect.objectContaining({
-			day: expect.any(Number),
-			title: expect.any(String),
+	test('Every event (first) is an object {month: {value, label}, year, data: [{day, title}]}', () =>{
+		const {solo, mixed} = SAMPLECONTENT;
+		const input = getEventsData({value:solo})[0];
+
+		expect(input).toEqual(expect.objectContaining({
+			month: expect.objectContaining({
+				value: expect.any(Number),
+				label: expect.any(String)
+			}),
+			year: expect.any(Number),
+			data: expect.arrayContaining([
+				expect.objectContaining({
+					day: expect.any(Number),
+					title: expect.any(String)
+				})
+			])
 		}));
 	});
 });
