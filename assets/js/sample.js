@@ -1,4 +1,4 @@
-function initSampleContent(container, content) {
+function initContent(container, content) {
 	container.value = content;
 }
 
@@ -6,4 +6,4 @@ function initSampleContent(container, content) {
 
 
 
-export {initSampleContent};
+export {initContent};

@@ -8,6 +8,21 @@
 	margin: 0 2em;
 }
 
+.app__version {
+	font-size: 12px;
+	font-weight: normal;
+}
+
+
+
+
+.accessible-hide {
+	clip: rect(1px, 1px, 1px, 1px);
+	height: 1px;
+	margin: 0 !important;
+	overflow: hidden;
+	position: absolute;
+}
 
 
 
@@ -18,6 +33,7 @@
 	border: 0;
 	border-radius: 10px;
 	color: white;
+	cursor: pointer;
 	display: inline-block;
 	font: inherit;
 	font-weight: bold;
@@ -89,6 +105,7 @@
 	font: inherit;
 	font-size: 1em;
 	height: 5em;
+	margin-top: .5em;
 	min-width: 256px;
 	padding: .5em;
 	width: 100%;
@@ -107,6 +124,12 @@
 /* ANCHOR CALENDAR */
 .app__calendar {
 	display: none;
+	margin: 3em 0 6em;
+}
+
+.app__calendar .app__wrapper {
+	border-top: 1px solid rgba(0, 0, 0, .3);
+	padding-top: 1.5em;
 }
 
 .app__calendar--on {

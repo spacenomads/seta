@@ -11,38 +11,28 @@
 
 		<section class="app__section app__data">
 			<div class="app__wrapper">
-				<h1 class="app__title">Generador de calendario v0.7.0</h1>
-				<div class="samples">
-					<p class="sample">Enero: 4 "Enola Holmes", 7 "Dash y Lily", 12 "COnviVIenDo 19 días", 14 "Tras esa montaña está la orilla", 19 "Drama", 21 "Quiero volver", 26 "Legally Blonde", 28 "Hijas de Lilith".</p>
-					<p class="sample">Enero: 12 "COnviVIenDo 19 días", 14 "Tras esa montaña está la orilla", 19 "Drama", 21 "Quiero volver", 26 "Legally Blonde", 28 "Hijas de Lilith". Febrero: 2 "She Loves Me", 4 "Isla", 9 "Guía del caballero para el vicio y la virtud", 11 "Parabellum", 16 "Destellos",  18 "Y no quedó ninguno", 23 "La última mujer de La Mancha", 25 "El Vizconde que me amó"
-						.</p>
-				</div>
+				<h1 class="app__title">Generador de calendario <span class="app__version">v1.0.0</span></h1>
 				<form action="" class="form">
 					<div class="form__group">
 						<div class="form__row">
-							<label for="telegramInputSolo" class="form__label">Mensaje de telegram SOLO</label>
-							<textarea name="telegramInputSolo" id="telegramInputSolo" class="form__field form__textarea js__telegramInputSolo"></textarea>
-						</div>
-
-						<div class="form__row">
-							<label for="telegramInputMixed" class="form__label">Mensaje de telegram MIXED</label>
-							<textarea name="telegramInputMixed" id="telegramInputMixed" class="form__field form__textarea js__telegramInputMixed"></textarea>
+							<label for="telegramInput" class="form__label">Mensaje de telegram:</label>
+							<textarea name="telegramInput" id="telegramInput" class="form__field form__textarea js__telegramInput"></textarea>
 						</div>
 					</div>
 					<div class="form__row form__row--actions">
 						<ul class="app__form-actions">
 							<li class="app__form-action">
-								<button class="button js__generate-calendars" type="button">Generar</button>
+								<button class="button js__generate-calendars" type="button">Generar eventos</button>
 							</li>
 						</ul>
 					</div>
 				</form>
 			</div>
 		</section>
-		<section class="app__section app__calendar js__ics">
+		<section class="app__section app__calendar js__ics" aria-hidden="true">
 			<div class="app__wrapper">
 
-				<h2 class="app__calendar-title accessible-hide">Calendarios:</h2>
+				<h2 class="app__calendar-title accessible-hide">Eventos:</h2>
 				<ul class="app__calendar-events js__ics-events"></ul>
 			</div>
 		</section>

@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import {SAMPLECONTENT} from '../assets/js/vars';
-import {initSampleContent} from '../assets/js/sample.js';
+import {initContent} from '../assets/js/sample.js';
 import {getEventsData, getMonthFromStrEvent, splitEvents} from '../assets/js/get-data.js';
 import {getTwoDigitNumber} from '../assets/js/helpers.js';
 
@@ -10,7 +10,7 @@ describe('SPAMPLES', () => {
 		const obj = {
 			value: ''
 		};
-		initSampleContent(obj, input);
+		initContent(obj, input);
 		expect(obj.value).toBe(result);
 	});
 });

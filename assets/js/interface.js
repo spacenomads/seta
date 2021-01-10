@@ -41,6 +41,8 @@ function showCalendars(block, data) {
 
 	blockEvents.innerHTML = result;
 	block.classList.add('app__calendar--on');
+	block.setAttribute('role', 'alert');
+	block.setAttribute('aria-hidden', false);
 }
 
 export {showCalendars};
