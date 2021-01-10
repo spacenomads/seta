@@ -3,4 +3,23 @@ function getCurrentYear() {
 	return now.getFullYear();
 }
 
-export {getCurrentYear};
+
+
+
+function getTwoDigitNumber(num) {
+	return num > 9 ? num.toString() : '0' + num;
+}
+
+
+
+
+
+function getCalendarUri(cal) {
+	return `data:text/calendar;charset=utf-8,${encodeURIComponent(cal)}`;
+}
+
+
+
+
+
+export {getCurrentYear, getTwoDigitNumber, getCalendarUri};

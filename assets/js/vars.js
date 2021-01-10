@@ -5,7 +5,7 @@ const TZID = 'Europe/Madrid';
 const TSTART = 'T213000';
 const TEND = 'T230000';
 const ALARM = '15';
-const CALENDARFILENAME = 'videoclub-de-lectura';
+const CALENDARFILENAME = 'seta';
 const WEEK = [
 	'domingo',
 	'lunes',

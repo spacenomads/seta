@@ -2,6 +2,7 @@
 import {SAMPLECONTENT} from '../assets/js/vars';
 import {initSampleContent} from '../assets/js/sample.js';
 import {getEventsData, getMonthFromStrEvent, splitEvents} from '../assets/js/get-data.js';
+import {getTwoDigitNumber} from '../assets/js/helpers.js';
 
 describe('SPAMPLES', () => {
 	test('Successfully add content to the container', () => {
@@ -11,6 +12,24 @@ describe('SPAMPLES', () => {
 		};
 		initSampleContent(obj, input);
 		expect(obj.value).toBe(result);
+	});
+});
+
+
+
+
+
+describe('Helpers', () => {
+	test('Two digit string: 2 -> 02', () => {
+		const input = 2;
+		const result = '02';
+		expect(getTwoDigitNumber(input)).toBe(result);
+	});
+
+	test('Two digit string: 12 -> 12', () => {
+		const input = 12;
+		const result = '12';
+		expect(getTwoDigitNumber(input)).toBe(result);
 	});
 });
 

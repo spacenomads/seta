@@ -47,7 +47,16 @@
 .app__event-code {
 	border: 2px solid red;
 	display: block;
+	display: none;
 	padding: 5px 20px;
+}
+
+.app__event-code pre {
+	overflow: hidden;
+	white-space: pre-wrap;
+	white-space: -moz-pre-wrap;
+	white-space: -o-pre-wrap;
+	word-wrap: break-word;
 }
 
 
@@ -100,7 +109,7 @@
 	display: none;
 }
 
-.app__calendar--visible {
+.app__calendar--on {
 	display: block;
 }
 
@@ -114,4 +123,94 @@
 .app__calendar-action + .app__calendar-action::before {
 	content: '/';
 	padding: 0 .5em;
+}
+
+
+
+
+
+/* ANCHOR EVENTS */
+.app__calendar-events,
+.events {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+
+
+.app__calendar-event + .app__calendar-event {
+	margin-top: 4em;
+}
+
+.app__calendar-event-title {
+	margin: 0 0 1em;
+}
+
+.events {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, 250px);
+	max-width: 632px;
+
+	gap: 32px;
+}
+
+.event {
+	min-height: 50px;
+}
+
+
+.event__link {
+	color: inherit;
+	display: block;
+	padding-left: 65px;
+	position: relative;
+	text-decoration: none;
+}
+
+.event__icon {
+	background: white;
+	border-radius: 6px;
+	box-shadow: 0 .1em 5px rgba(0, 0, 0, .5);
+	display: block;
+	font-style: normal;
+	left: 0;
+	overflow: hidden;
+	position: absolute;
+	text-align: center;
+	text-transform: uppercase;
+	top: 0;
+	width: 47px;
+}
+
+.event__icon-month {
+	background: red;
+	color: white;
+	display: block;
+	font-size: .5em;
+	font-weight: bold;
+	padding: .4em 0 .2em;
+}
+
+.event__icon-day {
+	display: block;
+	font-size: 1.5em;
+	padding: .2em 0;
+}
+
+.event__date {
+	color: grey;
+	font-size: .8em;
+	margin-top: .5em;
+	text-transform: capitalize;
+}
+
+.event__title {
+	font: inherit;
+	font-weight: bold;
+	margin: 0;
+}
+.event__title::before,
+.event__title::after {
+	content: '"';
 }
