@@ -1,10 +1,9 @@
 /* eslint-disable no-undef */
 import {SAMPLECONTENT} from '../assets/js/vars';
-import {initContent} from '../assets/js/sample.js';
 import {getEventsData, getMonthFromStrEvent, splitEvents} from '../assets/js/get-data.js';
-import {getTwoDigitNumber} from '../assets/js/helpers.js';
+import {initContent, getTwoDigitNumber} from '../assets/js/helpers.js';
 
-describe('SPAMPLES', () => {
+describe('Init', () => {
 	test('Successfully add content to the container', () => {
 		const {solo: input, solo: result} = SAMPLECONTENT;
 		const obj = {

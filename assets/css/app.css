@@ -19,6 +19,7 @@
 
 
 
+
 /* BUTTONS */
 .button {
 	background: #0088ee;
@@ -52,9 +53,8 @@
 	position: absolute;
 	left: 0;
 	top: 0;
-	transform: translateX(-100%)
+	transform: translateX(-100%);
 }
-
 
 .app__version {
 	font-size: 12px;
@@ -103,18 +103,22 @@
 
 .form__label {
 	font-weight: 600;
+	display: block;
+	margin-bottom: .5em;
+}
+
+.form__field {
+	border: 1px solid #e5e6e7;
+	box-sizing: border-box;
+	font: inherit;
+	font-size: 1em;
+	padding: .5em;
+	width: 100%;
 }
 
 .form__textarea {
-	box-sizing: border-box;
-	display: block;
-	font: inherit;
-	font-size: 1em;
 	height: 5em;
-	margin-top: .5em;
 	min-width: 256px;
-	padding: .5em;
-	width: 100%;
 }
 
 .app__form-actions {

@@ -20,7 +20,26 @@
 							<textarea name="telegramInput" id="telegramInput" class="form__field form__textarea js__telegramInput"></textarea>
 						</div>
 					</div>
+					<fieldset class="app__customize">
+						<legend class="app__leyend">Personaliza el evento</legend>
+
+						<div class="form__group">
+							<div class="form__row">
+								<label for="customAlarm" class="form__label">Alarma</label>
+								<input type="number" name="customAlarm" id="customAlarm" class="form__field form__field js__customAlarm">
+								<p class="form__note">Escribe 0 si no quieres una alarma</p>
+							</div>
+
+							<div class="form__row">
+								<label for="customLink" class="form__label">Enlace de Zoom</label>
+								<input type="url" name="customLink" id="customLink" class="form__field form__field js__customLink">
+								<p class="form__note">Complétalo si lo sabes</p>
+							</div>
+						</div>
+
+					</fieldset>
 					<div class="form__row form__row--actions">
+
 						<ul class="app__form-actions">
 							<li class="app__form-action">
 								<button class="button js__generate-calendars" type="button">Generar eventos</button>
