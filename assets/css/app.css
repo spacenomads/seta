@@ -8,14 +8,6 @@
 	margin: 0 2em;
 }
 
-.app__version {
-	font-size: 12px;
-	font-weight: normal;
-}
-
-
-
-
 .accessible-hide {
 	clip: rect(1px, 1px, 1px, 1px);
 	height: 1px;
@@ -46,16 +38,30 @@
 
 
 
-/* ANCHOR SAMPLES */
-.samples {
-	display: none;
+/* ANCHOR LAYOUT */
+.app__title {
+	border-left: 1px solid rgba(0, 0, 0, .2);
+	margin-left: 1.5em;
+	padding-left: .5em;
+	position: relative;
+}
+
+.app__title::before {
+	content: '🍄';
+	padding-right: .5em;
+	position: absolute;
+	left: 0;
+	top: 0;
+	transform: translateX(-100%)
 }
 
 
+.app__version {
+	font-size: 12px;
+	font-weight: normal;
+	display: block;
+}
 
-
-
-/* ANCHOR LAYOUT */
 .app__event {
 	margin: 1.5em 0 3em;
 }
