@@ -97,10 +97,6 @@
 	margin-top: 2em;
 }
 
-.form__group .form__row + .form__row {
-	margin-top: 0;
-}
-
 .form__label {
 	font-weight: 600;
 	display: block;

@@ -1,12 +1,11 @@
 import {WEEK, TZID, TSTART, TEND, ALARM, NEWLINE} from './vars.js';
-import {getAlarm, getLink} from './customize.js';
+import {getAlarm, getLink, getCallDetails} from './customize.js';
 import {getTwoDigitNumber} from './helpers.js';
 
 function getIcsString(event, month, year) {
 	const {day, title} = event;
 	const timeStart = `${year}${getTwoDigitNumber(month + 1)}${getTwoDigitNumber(day)}${TSTART}`;
 	const timeEnd = `${year}${getTwoDigitNumber(month + 1)}${getTwoDigitNumber(day)}${TEND}`;
-
 
 	const vcalendar = [
 		'BEGIN:VCALENDAR',
@@ -19,7 +18,7 @@ function getIcsString(event, month, year) {
 		`DTSTART;TZID=${TZID}:${timeStart}`,
 		`DTEND;TZID=${TZID}:${timeEnd}`,
 		`LOCATION:Online (Zoom)`,
-		`DESCRIPTION:Videoclub de lectura de La Sombra: Hoy toca ${title}`,
+		`DESCRIPTION:Videoclub de lectura de La Sombra: Hoy toca ${title}. ${getCallDetails()}`,
 		`STATUS:CONFIRMED`,
 		`SEQUENCE:0`,
 		`END:VEVENT`,
@@ -27,22 +26,12 @@ function getIcsString(event, month, year) {
 	];
 
 	const link = getLink();
-	const vLink = `URL;VALUE=URI:${link}`;
 	const linkIndex = vcalendar.length - 4;
-	link && vcalendar.splice(linkIndex, 0, vLink);
-
+	link && vcalendar.splice(linkIndex, 0, link);
 
 	const alarm = getAlarm();
-	const vAlarm = [
-		`BEGIN:VALARM`,
-		`TRIGGER:-PT${alarm}M`,
-		`DESCRIPTION:Prepárate para la 🍄 Seta!`,
-		`ACTION:DISPLAY`,
-		`END:VALARM`,
-	];
-
 	const alarmIndex = vcalendar.length - 2;
-	alarm && vcalendar.splice(alarmIndex, 0, vAlarm);
+	alarm && vcalendar.splice(alarmIndex, 0, alarm);
 
 	console.log(vcalendar.flat());
 

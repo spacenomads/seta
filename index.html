@@ -12,7 +12,7 @@
 
 		<section class="app__section app__data">
 			<div class="app__wrapper">
-				<h1 class="app__title">Generador de calendario <span class="app__version">v1.0.0</span></h1>
+				<h1 class="app__title">Generador de calendario <span class="app__version">v1.2.0</span></h1>
 				<form action="" class="form">
 					<div class="form__group">
 						<div class="form__row">
@@ -24,16 +24,31 @@
 						<legend class="app__leyend">Personaliza el evento</legend>
 
 						<div class="form__group">
-							<div class="form__row">
-								<label for="customAlarm" class="form__label">Alarma</label>
-								<input type="number" name="customAlarm" id="customAlarm" class="form__field form__field js__customAlarm">
-								<p class="form__note">Escribe 0 si no quieres una alarma</p>
+							<div class="form__alarm">
+								<div class="form__row">
+									<label for="customAlarm" class="form__label">Alarma</label>
+									<input type="number" name="customAlarm" id="customAlarm" class="form__field form__field js__customAlarm">
+									<p class="form__note">Escribe 0 si no quieres una alarma</p>
+								</div>
 							</div>
 
-							<div class="form__row">
-								<label for="customLink" class="form__label">Enlace de Zoom</label>
-								<input type="url" name="customLink" id="customLink" class="form__field form__field js__customLink">
-								<p class="form__note">Complétalo si lo sabes</p>
+							<div class="form__call">
+								<div class="form__row">
+									<label for="callLink" class="form__label">Enlace de Zoom</label>
+									<input type="url" name="callLink" id="callLink" class="form__field form__field js__callLink">
+									<p class="form__note">Complétalo si lo sabes</p>
+								</div>
+
+								<div class="form__row">
+									<label for="callId" class="form__label">Id de reunión</label>
+									<input type="text" name="callId" id="callId" class="form__field form__field js__callId">
+								</div>
+
+								<div class="form__row">
+									<label for="callPwd" class="form__label">Código de acceso</label>
+									<input type="number" name="callPwd" id="callPwd" class="form__field form__field js__callPwd">
+								</div>
+
 							</div>
 						</div>
 
