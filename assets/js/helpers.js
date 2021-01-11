@@ -1,3 +1,11 @@
+function initContent(container, content) {
+	container.value = content;
+}
+
+
+
+
+
 function getCurrentYear() {
 	const now = new Date();
 	return now.getFullYear();
@@ -22,4 +30,4 @@ function getCalendarUri(cal) {
 
 
 
-export {getCurrentYear, getTwoDigitNumber, getCalendarUri};
+export {initContent, getCurrentYear, getTwoDigitNumber, getCalendarUri};

@@ -8,14 +8,6 @@
 	margin: 0 2em;
 }
 
-.app__version {
-	font-size: 12px;
-	font-weight: normal;
-}
-
-
-
-
 .accessible-hide {
 	clip: rect(1px, 1px, 1px, 1px);
 	height: 1px;
@@ -23,6 +15,7 @@
 	overflow: hidden;
 	position: absolute;
 }
+
 
 
 
@@ -46,16 +39,29 @@
 
 
 
-/* ANCHOR SAMPLES */
-.samples {
-	display: none;
+/* ANCHOR LAYOUT */
+.app__title {
+	border-left: 1px solid rgba(0, 0, 0, .2);
+	margin-left: 1.5em;
+	padding-left: .5em;
+	position: relative;
 }
 
+.app__title::before {
+	content: '🍄';
+	padding-right: .5em;
+	position: absolute;
+	left: 0;
+	top: 0;
+	transform: translateX(-100%);
+}
 
+.app__version {
+	font-size: 12px;
+	font-weight: normal;
+	display: block;
+}
 
-
-
-/* ANCHOR LAYOUT */
 .app__event {
 	margin: 1.5em 0 3em;
 }
@@ -91,24 +97,24 @@
 	margin-top: 2em;
 }
 
-.form__group .form__row + .form__row {
-	margin-top: 0;
-}
-
 .form__label {
 	font-weight: 600;
+	display: block;
+	margin-bottom: .5em;
+}
+
+.form__field {
+	border: 1px solid #e5e6e7;
+	box-sizing: border-box;
+	font: inherit;
+	font-size: 1em;
+	padding: .5em;
+	width: 100%;
 }
 
 .form__textarea {
-	box-sizing: border-box;
-	display: block;
-	font: inherit;
-	font-size: 1em;
 	height: 5em;
-	margin-top: .5em;
 	min-width: 256px;
-	padding: .5em;
-	width: 100%;
 }
 
 .app__form-actions {

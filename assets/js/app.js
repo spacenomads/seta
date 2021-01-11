@@ -1,5 +1,6 @@
 import {SAMPLECONTENT} from './vars.js';
-import {initContent} from './sample.js';
+import {initContent} from './helpers.js';
+import {setDefaultAlarm} from './customize.js';
 import {getEventsData} from './get-data.js';
 import {makeCalendars} from './calendar.js';
 import {showCalendars} from './interface.js';
@@ -16,7 +17,7 @@ const icsCode = app.querySelector('.js__ics-code');
 
 // Remove before main version deployment
 initContent(telegramInput, SAMPLECONTENT.mixed);
-//initSampleContent(telegramInputMixed, SAMPLECONTENT.mixed);
+setDefaultAlarm();
 
 
 
