@@ -33,8 +33,6 @@ function getIcsString(event, month, year) {
 	const alarmIndex = vcalendar.length - 2;
 	alarm && vcalendar.splice(alarmIndex, 0, alarm);
 
-	console.log(vcalendar.flat());
-
 	return vcalendar.flat().join(NEWLINE);
 }
 
