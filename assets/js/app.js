@@ -1,9 +1,10 @@
 import {SAMPLECONTENT} from './vars.js';
 import {initContent} from './helpers.js';
-import {setDefaultAlarm} from './customize.js';
+import {setCustomData} from './customize.js';
 import {getEventsData} from './get-data.js';
 import {makeCalendars} from './calendar.js';
 import {showCalendars} from './interface.js';
+import {getSavedData} from './localstorage.js';
 
 const app = document.querySelector('.app');
 const generateBtn = app.querySelector('.js__generate-calendars');
@@ -17,7 +18,8 @@ const icsCode = app.querySelector('.js__ics-code');
 
 // Remove before main version deployment
 initContent(telegramInput, SAMPLECONTENT.mixed);
-setDefaultAlarm();
+const customData = getSavedData();
+customData && setCustomData(customData);
 
 
 

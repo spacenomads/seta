@@ -8,4 +8,13 @@ function saveData(data) {
 
 
 
-export {saveData};
+function getSavedData() {
+	const savedData = JSON.parse(localStorage.getItem(SAVEDNAME));
+	return savedData || undefined;
+}
+
+
+
+
+
+export {getSavedData, saveData};
