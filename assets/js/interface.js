@@ -1,6 +1,21 @@
 import {CALENDARFILENAME} from './vars.js';
 import {getCalendarUri} from './helpers.js';
 
+
+
+
+
+function resetEvents(block, events) {
+	events.innerHTML = '';
+	block.classList.remove('app__calendar--on');
+	block.removeAttribute('role', 'alert');
+	block.setAttribute('aria-hidden', true);
+}
+
+
+
+
+
 function calendarToCode(data) {
 	const {month, events} = data;
 	let result = '';
@@ -24,6 +39,9 @@ function calendarToCode(data) {
 }
 
 
+
+
+
 function showCalendars(block, data) {
 	const blockEvents = block.querySelector('.js__ics-events');
 
@@ -45,4 +63,4 @@ function showCalendars(block, data) {
 	block.setAttribute('aria-hidden', false);
 }
 
-export {showCalendars};
+export {showCalendars, resetEvents};

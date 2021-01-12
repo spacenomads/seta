@@ -1,4 +1,5 @@
 import {ALARM} from './vars.js';
+importn {resetEvents} from './interface.js';
 
 const alarm = document.querySelector('.js__customAlarm');
 const callLink = document.querySelector('.js__callLink');
@@ -59,6 +60,24 @@ function getCallDetails() {
 
 	return result;
 }
+
+
+
+
+
+function customizationHasChanged() {
+	const icsBlock = document.querySelector('.js__ics');
+	const blockEvents = icsBlock.querySelector('.js__ics-events');
+	resetEvents(icsBlock, blockEvents);
+}
+
+
+
+
+alarm.addEventListener('change', customizationHasChanged);
+callLink.addEventListener('change', customizationHasChanged);
+callId.addEventListener('change', customizationHasChanged);
+callPwd.addEventListener('change', customizationHasChanged);
 
 
 
