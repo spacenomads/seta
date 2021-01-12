@@ -1,14 +1,11 @@
 import {ALARM} from './vars.js';
-importn {resetEvents} from './interface.js';
+import {resetEvents} from './interface.js';
+import {saveData} from './localstorage.js';
 
 const alarm = document.querySelector('.js__customAlarm');
 const callLink = document.querySelector('.js__callLink');
 const callId = document.querySelector('.js__callId');
 const callPwd = document.querySelector('.js__callPwd');
-
-function setDefaultAlarm() {
-	alarm.value = ALARM;
-}
 
 
 
@@ -16,7 +13,6 @@ function setDefaultAlarm() {
 
 function getAlarm() {
 	const alarmT = alarm.value === '0' ? 0 : (Number(alarm.value) || ALARM);
-
 	const vAlarm = [
 		`BEGIN:VALARM`,
 		`TRIGGER:-PT${alarmT}M`,
@@ -65,10 +61,35 @@ function getCallDetails() {
 
 
 
+function setCustomData(data) {
+	const {alarm: savedAlarm} = data;
+	const {link, cId, cPwd} = data.zoom;
+
+	alarm.value = savedAlarm || ALARM;
+	callLink.value = link || '';
+	callId.value = cId || '';
+	callPwd.value = cPwd || '';
+}
+
+
+
+
 function customizationHasChanged() {
+	const link = getLinkData();
+	const cId = callId.value;
+	const cPwd = callPwd.value;
 	const icsBlock = document.querySelector('.js__ics');
 	const blockEvents = icsBlock.querySelector('.js__ics-events');
 	resetEvents(icsBlock, blockEvents);
+	const customData = {
+		alarm: alarm.value,
+		zoom: {
+			link,
+			cId,
+			cPwd
+		}
+	};
+	saveData(customData);
 }
 
 
@@ -83,4 +104,4 @@ callPwd.addEventListener('change', customizationHasChanged);
 
 
 
-export {setDefaultAlarm, getAlarm, getLink, getCallDetails};
+export {getAlarm, getLink, getCallDetails, setCustomData};
