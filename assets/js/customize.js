@@ -1,5 +1,6 @@
 import {ALARM} from './vars.js';
-importn {resetEvents} from './interface.js';
+import {resetEvents} from './interface.js';
+import {saveData} from './localstorage.js';
 
 const alarm = document.querySelector('.js__customAlarm');
 const callLink = document.querySelector('.js__callLink');
@@ -66,9 +67,21 @@ function getCallDetails() {
 
 
 function customizationHasChanged() {
+	const link = getLinkData();
+	const cId = callId.value;
+	const cPwd = callPwd.value;
 	const icsBlock = document.querySelector('.js__ics');
 	const blockEvents = icsBlock.querySelector('.js__ics-events');
 	resetEvents(icsBlock, blockEvents);
+	const customData = {
+		alarm: alarm.value,
+		zoom: {
+			link,
+			cId,
+			cPwd
+		}
+	};
+	saveData(customData);
 }
 
 
