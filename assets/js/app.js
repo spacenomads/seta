@@ -30,7 +30,6 @@ function generateCalendars() {
 
 	if (content) {
 		const eventsData = getEventsData(telegramInput);
-		console.log(eventsData);
 		const calendarsData = makeCalendars(eventsData);
 
 		showCalendars(icsBlock, calendarsData);
@@ -43,5 +42,4 @@ function generateCalendars() {
 
 
 
-//generateBtn.addEventListener('click', generateCalendars);
-generateCalendars();
+generateBtn.addEventListener('click', generateCalendars);

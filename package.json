@@ -1,6 +1,6 @@
 {
   "name": "seta",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "description": "Mini application to generate book club \"ics\" files from a Telegram message.",
   "main": "index.html",
   "scripts": {
