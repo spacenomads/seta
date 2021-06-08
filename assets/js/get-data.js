@@ -1,4 +1,4 @@
-import {MONTHS, SENTENCE} from './vars.js';
+import {MONTHS, SENTENCE, MONTH_REGEX, EVENTS_REGEX, SINGLE_EVENT_REGEX, MONTH_DIVIDER_CHAR, EVENTS_DIVIDER_CHAR} from './vars.js';
 import {getCurrentYear} from './helpers.js';
 
 
@@ -6,7 +6,8 @@ import {getCurrentYear} from './helpers.js';
 
 
 function getTitle(str) {
-	return str.match(SENTENCE).toString().replace(/["]/g, '');
+	const result = str.match(SENTENCE).toString().replace(/["]/g, '');
+	return result;
 }
 
 
@@ -33,19 +34,26 @@ function getMonthFromStrEvent(str) {
 
 
 function splitEvents(str) {
-	const result = str
+	return str
 		.split(':')[1]
-		.replace('.', '')
-		.split(',')
+		.split(EVENTS_DIVIDER_CHAR)
 		.map(event => {
-			const parts = event
-				.trim()
-				.split(' ');
+			const {day, title, guest} = event.match(SINGLE_EVENT_REGEX).groups;
 			return {
-				day: Number(parts[0]),
-				title: getTitle(event)
+				day,
+				title,
+				guest
 			};
 		});
+}
+
+
+
+
+function cleanMessage(str) {
+	let result = str.replaceAll('...', '…');
+	result = result.replaceAll(MONTH_REGEX, MONTH_DIVIDER_CHAR);
+	result = result.replaceAll(EVENTS_REGEX, EVENTS_DIVIDER_CHAR);
 	return result;
 }
 
@@ -54,17 +62,16 @@ function splitEvents(str) {
 
 
 function getEventsData(el) {
-	const events = el.value
-		.split('.')
-		.filter(item => item)
-		.map(event => {
+	const message = cleanMessage(el.value);
+	return message
+		.split(MONTH_DIVIDER_CHAR)
+		.map(events => {
 			return {
-				month: getMonthFromStrEvent(event),
+				month: getMonthFromStrEvent(events),
 				year: getCurrentYear(),
-				data: splitEvents(event)
+				data: splitEvents(events)
 			};
 		});
-	return events;
 }
 
 

@@ -62,8 +62,8 @@ describe('Get data from telegram post', () => {
 	});
 
 	test('Every event (first) is an object {month: {value, label}, year, data: [{day, title}]}', () =>{
-		const {solo, mixed} = SAMPLECONTENT;
-		const input = getEventsData({value:solo})[0];
+		const {solo, mixed, mixedNew} = SAMPLECONTENT;
+		const input = getEventsData({ value: mixedNew})[0];
 
 		expect(input).toEqual(expect.objectContaining({
 			month: expect.objectContaining({

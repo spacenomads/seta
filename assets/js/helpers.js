@@ -15,7 +15,7 @@ function getCurrentYear() {
 
 
 function getTwoDigitNumber(num) {
-	return num > 9 ? num.toString() : '0' + num;
+	return ('0' + num).slice(-2);
 }
 
 
@@ -29,5 +29,23 @@ function getCalendarUri(cal) {
 
 
 
+function getTitleNumbers(str) {
+	let result = '';
+	for (let i = 0; i < str.length; i++) {
+		const char = str.charCodeAt(i);
+		result += '' + char;
+	}
+	return result;
+}
 
-export {initContent, getCurrentYear, getTwoDigitNumber, getCalendarUri};
+
+
+
+
+export {
+	initContent,
+	getCurrentYear,
+	getTwoDigitNumber,
+	getCalendarUri,
+	getTitleNumbers
+};
