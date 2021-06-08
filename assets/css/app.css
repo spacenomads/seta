@@ -239,7 +239,7 @@
 	font-weight: bold;
 	margin: 0;
 }
-.event__title::before,
-.event__title::after {
+.event__title-label::before,
+.event__title-label::after {
 	content: '"';
 }
