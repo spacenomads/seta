@@ -21,7 +21,7 @@ function calendarToCode(data) {
 	let result = '';
 
 	for (let i=0; i < events.length; i++) {
-		const {title, ics, day, dow} = events[i];
+		const {title, guest, ics, day, dow} = events[i];
 		const filename = `${CALENDARFILENAME}-${month.label}-${day}.ics`;
 		result += `<li class="event">
 		<a href="${getCalendarUri(ics)}" download="${filename}" class="event__link">
@@ -30,7 +30,7 @@ function calendarToCode(data) {
 			<span class="event__icon-day">${day}</span>
 		</i>
 		<div class="event__date">${dow} ${day}</div>
-		<h4 class="event__title">${title}</h4>
+		<h4 class="event__title">${title}${guest ? ' ' + guest : ''}</h4>
 		</a>
 	</li>`;
 	}
