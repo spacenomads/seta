@@ -17,7 +17,7 @@ const icsCode = app.querySelector('.js__ics-code');
 
 
 // Remove before main version deployment
-initContent(telegramInput, SAMPLECONTENT.mixed);
+initContent(telegramInput, SAMPLECONTENT.last);
 const customData = getSavedData();
 customData && setCustomData(customData);
 
@@ -30,6 +30,7 @@ function generateCalendars() {
 
 	if (content) {
 		const eventsData = getEventsData(telegramInput);
+		console.log(eventsData);
 		const calendarsData = makeCalendars(eventsData);
 
 		showCalendars(icsBlock, calendarsData);
@@ -42,4 +43,5 @@ function generateCalendars() {
 
 
 
-generateBtn.addEventListener('click', generateCalendars);
+//generateBtn.addEventListener('click', generateCalendars);
+generateCalendars();

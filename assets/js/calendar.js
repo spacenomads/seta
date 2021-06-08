@@ -1,22 +1,42 @@
 import {WEEK, TZID, TSTART, TEND, ALARM, NEWLINE} from './vars.js';
 import {getAlarm, getLink, getCallDetails} from './customize.js';
-import {getTwoDigitNumber} from './helpers.js';
+import { getTwoDigitNumber, getTitleNumbers} from './helpers.js';
+
+
+function getDTStamp() {
+	const now = new Date();
+	const year = now.getFullYear();
+	const month = ('0' + (now.getMonth() + 1)).slice(-2);
+	const day = ('0' + now.getDay()).slice(-2);
+	const hours = ('0' + now.getHours()).slice(-2);
+	const minutes = ('0' + now.getMinutes()).slice(-2);
+	return `${year}${month}${day}T${hours}${minutes}00`;
+}
+
+
+
+
 
 function getIcsString(event, month, year) {
-	const {day, title} = event;
+	const {day, title, guest} = event;
+	const uid = getTitleNumbers(title);
+	const dtstamp = getDTStamp();
 	const timeStart = `${year}${getTwoDigitNumber(month + 1)}${getTwoDigitNumber(day)}${TSTART}`;
 	const timeEnd = `${year}${getTwoDigitNumber(month + 1)}${getTwoDigitNumber(day)}${TEND}`;
-
 	const vcalendar = [
 		'BEGIN:VCALENDAR',
+		'PRODID:Seta',
 		'VERSION:2.0',
 		'NAME:NAME:🍄 Seta',
 		'COLOR:0:136:238',
 		'CALSCALE:GREGORIAN',
 		`BEGIN:VEVENT`,
-		`SUMMARY:[🍄 Seta] "${title}"`,
-		`DTSTART;TZID=${TZID}:${timeStart}`,
-		`DTEND;TZID=${TZID}:${timeEnd}`,
+		`UID:${uid}`,
+		`SUMMARY:[🍄 Seta] "${title}"${guest ? ' ' + guest : ''}`,
+		`TZID:${TZID}`,
+		`DTSTAMP:${dtstamp}`,
+		`DTSTART:${timeStart}`,
+		`DTEND:${timeEnd}`,
 		`LOCATION:Online (Zoom)`,
 		`DESCRIPTION:Videoclub de lectura de La Sombra: Hoy toca ${title}. ${getCallDetails()}`,
 		`STATUS:CONFIRMED`,
@@ -41,12 +61,13 @@ function getIcsString(event, month, year) {
 
 
 function formatEvent(event, month, year) {
-	const {day, title} = event;
+	const {day, title, guest} = event;
 	const dow = WEEK[new Date(`${month + 1} ${day}, ${year}`).getDay()];
 	return {
 		day,
 		dow,
 		title,
+		guest,
 		ics: getIcsString(event, month, year)
 	};
 }
