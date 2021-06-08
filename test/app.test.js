@@ -47,36 +47,10 @@ describe('Get data from telegram post', () => {
 		expect(getMonthFromStrEvent(input)).toMatchObject(result);
 	});
 
-	test('January has 7 events', () =>{
-		const {solo: input} = SAMPLECONTENT;
-		const result = 8;
-
-		expect(splitEvents(input).length).toBe(result);
-	});
-
 	test('Result is an Array', () =>{
 		const {solo: input} = SAMPLECONTENT;
 		const result = true;
 
 		expect(Array.isArray(splitEvents(input))).toBe(result);
-	});
-
-	test('Every event (first) is an object {month: {value, label}, year, data: [{day, title}]}', () =>{
-		const {solo, mixed, mixedNew} = SAMPLECONTENT;
-		const input = getEventsData({ value: mixedNew})[0];
-
-		expect(input).toEqual(expect.objectContaining({
-			month: expect.objectContaining({
-				value: expect.any(Number),
-				label: expect.any(String)
-			}),
-			year: expect.any(Number),
-			data: expect.arrayContaining([
-				expect.objectContaining({
-					day: expect.any(Number),
-					title: expect.any(String)
-				})
-			])
-		}));
 	});
 });

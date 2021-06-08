@@ -32,7 +32,7 @@ function getIcsString(event, month, year) {
 		'CALSCALE:GREGORIAN',
 		`BEGIN:VEVENT`,
 		`UID:${uid}`,
-		`SUMMARY:[🍄 Seta] "${title}"`,
+		`SUMMARY:[🍄 Seta] "${title}"${guest ? ' ' + guest : ''}`,
 		`TZID:${TZID}`,
 		`DTSTAMP:${dtstamp}`,
 		`DTSTART:${timeStart}`,

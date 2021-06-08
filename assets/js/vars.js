@@ -41,10 +41,9 @@ const SINGLE_EVENT_REGEX = /(?<day>[0-9]*)+[ ]+("(?<title>[a-zA-Z].+)")(?<guest>
 const SENTENCE = /(["'])(?:(?=(\\?))\2.)*?\1/g;
 
 const SAMPLECONTENT = {
-	solo: `Enero: 4 "Enola Holmes", 7 "Dash y Lily", 12 "COnviVIenDo 19 días", 14 "Tras esa montaña está la orilla", 19 "Drama", 21 "Quiero volver", 26 "Legally Blonde", 28 "Hijas de Lilith".`,
-	mixed: `Enero: 12 "COnviVIenDo 19 días", 14 "Tras esa montaña está la orilla", 19 "Drama", 21 "Quiero volver", 26 "Legally Blonde", 28 "Hijas de Lilith". Febrero: 2 "She Loves Me", 4 "Isla", 9 "Guía del caballero para el vicio y la virtud", 11 "Parabellum", 16 "Destellos",  18 "Y no quedó ninguno", 23 "La última mujer de La Mancha", 25 "El Vizconde que me amó"
-	.`,
-	mixedNew: 'Junio: 8 "Vestido de novia", 10 "El lingotazo" con Sergio, 15 "Superman contra el Klan", 17 "The Rocky Horror Picture Show", 22 "La husmeadora de Portosal" con Marina, 24 "El libro de la señorita Buncle" y 29 "Momo". Julio: 1 "La bruja de Ravensworth", 6 "Into the Heights", 8 "Snapdragon", 13 "Manolito gafotas", 15 "La única criatura..." con Carla, 20 "La tía Mame", 22 "No pidas sardinas...", 27 "Seguro de amor", 29 "Agatha Raisin..."'
+	solo: 'Enero: 4 "Enola Holmes", 7 "Dash y Lily", 12 "COnviVIenDo 19 días", 14 "Tras esa montaña está la orilla", 19 "Drama", 21 "Quiero volver", 26 "Legally Blonde", 28 "Hijas de Lilith"',
+	mixed: 'Enero: 12 "COnviVIenDo 19 días", 14 "Tras esa montaña está la orilla", 19 "Drama", 21 "Quiero volver", 26 "Legally Blonde", 28 "Hijas de Lilith". Febrero: 2 "She Loves Me", 4 "Isla", 9 "Guía del caballero para el vicio y la virtud", 11 "Parabellum", 16 "Destellos",  18 "Y no quedó ninguno", 23 "La última mujer de La Mancha", 25 "El Vizconde que me amó".',
+	last: 'Junio: 8 "Vestido de novia", 10 "El lingotazo" con Sergio, 15 "Superman contra el Klan", 17 "The Rocky Horror Picture Show", 22 "La husmeadora de Portosal" con Marina, 24 "El libro de la señorita Buncle" y 29 "Momo". Julio: 1 "La bruja de Ravensworth", 6 "Into the Heights", 8 "Snapdragon", 13 "Manolito gafotas", 15 "La única criatura..." con Carla, 20 "La tía Mame", 22 "No pidas sardinas...", 27 "Seguro de amor", 29 "Agatha Raisin..."'
 };
 
 export {

@@ -17,7 +17,7 @@ const icsCode = app.querySelector('.js__ics-code');
 
 
 // Remove before main version deployment
-initContent(telegramInput, SAMPLECONTENT.mixedNew);
+initContent(telegramInput, SAMPLECONTENT.last);
 const customData = getSavedData();
 customData && setCustomData(customData);
 
