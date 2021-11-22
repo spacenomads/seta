@@ -89,6 +89,7 @@ function formatEventData(cal) {
 
 
 function makeCalendars(data) {
+	console.log(data);
 	return data.map(formatEventData);
 }
 

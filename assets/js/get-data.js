@@ -41,19 +41,20 @@ function splitEvents(str) {
 		.map(event => {
 			let clonedEvent = event.trim();
 			const hasDay = SINGLE_EVENT_DAY_REGEX.test(clonedEvent);
-			const [day] = hasDay ? clonedEvent.match(SINGLE_EVENT_DAY_REGEX) : 'DIA';
+			const [day] = hasDay ? clonedEvent.match(SINGLE_EVENT_DAY_REGEX) : '';
 			clonedEvent = clonedEvent
 				.replace(day, '')
 				.trim();
 			const hasTitle = SINGLE_EVENT_TITLE_REGEX.test(clonedEvent);
-			const title = hasTitle ? clonedEvent.match(SINGLE_EVENT_TITLE_REGEX).groups.title : 'TITLE';
+			const title = hasTitle ? clonedEvent.match(SINGLE_EVENT_TITLE_REGEX).groups.title : '';
 			clonedEvent = clonedEvent
 				.replace(title, '')
+				.replaceAll('"','')
 				.trim();
 			return {
 				day,
-				title,
-				guest: clonedEvent
+				title: title ? title : clonedEvent,
+				guest: title ? clonedEvent : ''
 			};
 		});
 }
@@ -80,7 +81,8 @@ function getEventsData(content) {
 		.map(events => {
 			const month = getMonthFromStrEvent(events);
 			const year = getCurrentYear(month);
-			const data = splitEvents(events);
+			const data = splitEvents(events)
+				.filter(event => event.day);
 			return { month, year, data };
 		});
 }

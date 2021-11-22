@@ -35,10 +35,8 @@ const MONTH_DIVIDER_CHAR = '|';
 const EVENTS_DIVIDER_CHAR = 'ø';
 const MONTH_REGEX = /\.(?=(?:[^"]*"[^"]*")*[^"]*$)/g;
 const EVENTS_REGEX = /,| y (?=(?:[^"]*"[^"]*")*[^"]*$)/g;
-//const SINGLE_EVENT_REGEX = /(?<day>[0-9].+)("(?<title>[a-zA-Z].+)")(?<guest>[ con ][a-zA-Z].+)?/;
 const SINGLE_EVENT_DAY_REGEX = /[0-9]*/;
 const SINGLE_EVENT_TITLE_REGEX = /"+(?<title>[a-zA-Z].+)"/;
-// const SINGLE_EVENT_REGEX = /(?<day>[0-9]*)+[ ]+("(?<title>[a-zA-Z].+)")(?<guest>[ con ][a-zA-Z].+)?/;
 const SENTENCE = /(["'])(?:(?=(\\?))\2.)*?\1/g;
 
 const SAMPLECONTENT = {
