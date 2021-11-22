@@ -45,7 +45,7 @@ function getTitleNumbers(str) {
 
 function removeEmojis(srt) {
 	const regex = /\p{Extended_Pictographic}/ug;
-	return srt.replace(regex, '').replaceAll('\n', '.');
+	return srt.replace(regex, '').replaceAll('\n', '. ');
 }
 
 

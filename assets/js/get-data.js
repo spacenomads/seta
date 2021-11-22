@@ -1,5 +1,5 @@
 import {
-	MONTHS, SENTENCE, MONTH_REGEX, EVENTS_REGEX, SINGLE_EVENT_DAY_REGEX, SINGLE_EVENT_TITLE_REGEX, MONTH_DIVIDER_CHAR, EVENTS_DIVIDER_CHAR } from './vars.js';
+	MONTHS, SENTENCE, MONTH_REGEX, EVENTS_REGEX, SINGLE_EVENT_DAY_REGEX, SINGLE_EVENT_TITLE_REGEX, MONTH_DIVIDER_CHAR, EVENTS_DIVIDER_CHAR, UNWANTED_CHARS_REGEX } from './vars.js';
 import { getCurrentYear, removeEmojis} from './helpers.js';
 
 
@@ -15,7 +15,12 @@ function getTitle(str) {
 
 
 function getMonthNumber(str, months) {
-	return months.findIndex(month => month === str);
+
+	const cleanStr = str.replace(UNWANTED_CHARS_REGEX, '');
+
+	return months.findIndex(month => {
+		return cleanStr === month;
+	});
 }
 
 

@@ -38,6 +38,7 @@ const EVENTS_REGEX = /,| y (?=(?:[^"]*"[^"]*")*[^"]*$)/g;
 const SINGLE_EVENT_DAY_REGEX = /[0-9]*/;
 const SINGLE_EVENT_TITLE_REGEX = /"+(?<title>[a-zA-Z].+)"/;
 const SENTENCE = /(["'])(?:(?=(\\?))\2.)*?\1/g;
+const UNWANTED_CHARS_REGEX = /[^a-zA-Z0-9]/g;
 
 const SAMPLECONTENT = {
 	solo: 'Enero: 4 "Enola Holmes", 7 "Dash y Lily", 12 "COnviVIenDo 19 días", 14 "Tras esa montaña está la orilla", 19 "Drama", 21 "Quiero volver", 26 "Legally Blonde", 28 "Hijas de Lilith"',
@@ -62,6 +63,7 @@ export {
 	EVENTS_REGEX,
 	SINGLE_EVENT_DAY_REGEX,
 	SINGLE_EVENT_TITLE_REGEX,
+	UNWANTED_CHARS_REGEX,
 	WEEK,
 	ALARM,
 	SAMPLECONTENT,
