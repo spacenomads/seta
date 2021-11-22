@@ -34,16 +34,18 @@ const MONTHS = [
 const MONTH_DIVIDER_CHAR = '|';
 const EVENTS_DIVIDER_CHAR = 'ø';
 const MONTH_REGEX = /\.(?=(?:[^"]*"[^"]*")*[^"]*$)/g;
-const EVENTS_REGEX = /,|y(?=(?:[^"]*"[^"]*")*[^"]*$)/g;
-
-//const SINGLE_EVENT_REGEX = /(?<day>[0-9].+)("(?<title>[a-zA-Z].+)")(?<guest>[ con ][a-zA-Z].+)?/;
-const SINGLE_EVENT_REGEX = /(?<day>[0-9]*)+[ ]+("(?<title>[a-zA-Z].+)")(?<guest>[ con ][a-zA-Z].+)?/;
+const EVENTS_REGEX = /,| y (?=(?:[^"]*"[^"]*")*[^"]*$)/g;
+const SINGLE_EVENT_DAY_REGEX = /[0-9]*/;
+const SINGLE_EVENT_TITLE_REGEX = /"+(?<title>[a-zA-Z].+)"/;
 const SENTENCE = /(["'])(?:(?=(\\?))\2.)*?\1/g;
+const UNWANTED_CHARS_REGEX = /[^a-zA-Z0-9]/g;
 
 const SAMPLECONTENT = {
 	solo: 'Enero: 4 "Enola Holmes", 7 "Dash y Lily", 12 "COnviVIenDo 19 días", 14 "Tras esa montaña está la orilla", 19 "Drama", 21 "Quiero volver", 26 "Legally Blonde", 28 "Hijas de Lilith"',
 	mixed: 'Enero: 12 "COnviVIenDo 19 días", 14 "Tras esa montaña está la orilla", 19 "Drama", 21 "Quiero volver", 26 "Legally Blonde", 28 "Hijas de Lilith". Febrero: 2 "She Loves Me", 4 "Isla", 9 "Guía del caballero para el vicio y la virtud", 11 "Parabellum", 16 "Destellos",  18 "Y no quedó ninguno", 23 "La última mujer de La Mancha", 25 "El Vizconde que me amó".',
-	last: 'Junio: 8 "Vestido de novia", 10 "El lingotazo" con Sergio, 15 "Superman contra el Klan", 17 "The Rocky Horror Picture Show", 22 "La husmeadora de Portosal" con Marina, 24 "El libro de la señorita Buncle" y 29 "Momo". Julio: 1 "La bruja de Ravensworth", 6 "Into the Heights", 8 "Snapdragon", 13 "Manolito gafotas", 15 "La única criatura..." con Carla, 20 "La tía Mame", 22 "No pidas sardinas...", 27 "Seguro de amor", 29 "Agatha Raisin..."'
+	last: `🍁Noviembre: 18 "Matemos al tío", 22 Taylor Swfit No Bufandas Secret Club, 23 "Dear Evan Hansen" "Grease", 25 "Condición artificial" (MataBot 2 con Carla), 30 "Los muertos no pagan IVA"  (Parabellum 2 con Sergio)
+🎄Diciembre: 2 "Emprendadas" (Con La Crono), 7 "Orgullo y prejuicio y zombies", 9 "Agatha Raisin y el veterinario cruel", 14 "Nimona", 16 "Todo Dinokid" con presencia de su amado autor, 21 "Anna and the apocalypse" (musical), 23 "Harrow La novena", 28 "Matilda", 30 "Así se pierde la guerra del tiempo", Club de Clubes 🍄
+❄️Enero: 4 "Brujerías", 6 Musical "Lady Di", 11 "Los escarabajos vuelan al atardecer", 13 "El club de los libros prohibidos", 18 "Guía de lectura para matar vampiros", 20 "¡Prepárate!", 25 "Pastelería americana" 🧁, 27 "Confesiones".`,
 };
 
 export {
@@ -59,7 +61,9 @@ export {
 	EVENTS_DIVIDER_CHAR,
 	MONTH_REGEX,
 	EVENTS_REGEX,
-	SINGLE_EVENT_REGEX,
+	SINGLE_EVENT_DAY_REGEX,
+	SINGLE_EVENT_TITLE_REGEX,
+	UNWANTED_CHARS_REGEX,
 	WEEK,
 	ALARM,
 	SAMPLECONTENT,

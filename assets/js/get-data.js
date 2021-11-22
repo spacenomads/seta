@@ -1,5 +1,6 @@
-import {MONTHS, SENTENCE, MONTH_REGEX, EVENTS_REGEX, SINGLE_EVENT_REGEX, MONTH_DIVIDER_CHAR, EVENTS_DIVIDER_CHAR} from './vars.js';
-import {getCurrentYear} from './helpers.js';
+import {
+	MONTHS, SENTENCE, MONTH_REGEX, EVENTS_REGEX, SINGLE_EVENT_DAY_REGEX, SINGLE_EVENT_TITLE_REGEX, MONTH_DIVIDER_CHAR, EVENTS_DIVIDER_CHAR, UNWANTED_CHARS_REGEX } from './vars.js';
+import { getCurrentYear, removeEmojis} from './helpers.js';
 
 
 
@@ -14,7 +15,12 @@ function getTitle(str) {
 
 
 function getMonthNumber(str, months) {
-	return months.findIndex(month => month === str);
+
+	const cleanStr = str.replace(UNWANTED_CHARS_REGEX, '');
+
+	return months.findIndex(month => {
+		return cleanStr === month;
+	});
 }
 
 
@@ -38,11 +44,22 @@ function splitEvents(str) {
 		.split(':')[1]
 		.split(EVENTS_DIVIDER_CHAR)
 		.map(event => {
-			const {day, title, guest} = event.match(SINGLE_EVENT_REGEX).groups;
+			let clonedEvent = event.trim();
+			const hasDay = SINGLE_EVENT_DAY_REGEX.test(clonedEvent);
+			const [day] = hasDay ? clonedEvent.match(SINGLE_EVENT_DAY_REGEX) : '';
+			clonedEvent = clonedEvent
+				.replace(day, '')
+				.trim();
+			const hasTitle = SINGLE_EVENT_TITLE_REGEX.test(clonedEvent);
+			const title = hasTitle ? clonedEvent.match(SINGLE_EVENT_TITLE_REGEX).groups.title : '';
+			clonedEvent = clonedEvent
+				.replace(title, '')
+				.replaceAll('"','')
+				.trim();
 			return {
 				day,
-				title,
-				guest
+				title: title ? title : clonedEvent,
+				guest: title ? clonedEvent : ''
 			};
 		});
 }
@@ -61,16 +78,17 @@ function cleanMessage(str) {
 
 
 
-function getEventsData(el) {
-	const message = cleanMessage(el.value);
+function getEventsData(content) {
+	const message = cleanMessage( removeEmojis(content) );
 	return message
 		.split(MONTH_DIVIDER_CHAR)
+		.filter(Boolean)
 		.map(events => {
-			return {
-				month: getMonthFromStrEvent(events),
-				year: getCurrentYear(),
-				data: splitEvents(events)
-			};
+			const month = getMonthFromStrEvent(events);
+			const year = getCurrentYear(month);
+			const data = splitEvents(events)
+				.filter(event => event.day);
+			return { month, year, data };
 		});
 }
 

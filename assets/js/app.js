@@ -1,10 +1,10 @@
-import {SAMPLECONTENT} from './vars.js';
-import {initContent} from './helpers.js';
-import {setCustomData} from './customize.js';
-import {getEventsData} from './get-data.js';
-import {makeCalendars} from './calendar.js';
-import {showCalendars} from './interface.js';
-import {getSavedData} from './localstorage.js';
+import { SAMPLECONTENT } from './vars.js';
+import { initContent } from './helpers.js';
+import { setCustomData } from './customize.js';
+import { getEventsData } from './get-data.js';
+import { makeCalendars } from './calendar.js';
+import { showCalendars } from './interface.js';
+import { getSavedData } from './localstorage.js';
 
 const app = document.querySelector('.app');
 const generateBtn = app.querySelector('.js__generate-calendars');
@@ -29,7 +29,7 @@ function generateCalendars() {
 	const content = telegramInput.value;
 
 	if (content) {
-		const eventsData = getEventsData(telegramInput);
+		const eventsData = getEventsData(content);
 		const calendarsData = makeCalendars(eventsData);
 
 		showCalendars(icsBlock, calendarsData);
