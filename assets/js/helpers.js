@@ -6,9 +6,10 @@ function initContent(container, content) {
 
 
 
-function getCurrentYear() {
+function getCurrentYear(eventMonth) {
 	const now = new Date();
-	return now.getFullYear();
+	const currentMonth = now.getMonth();
+	return eventMonth.value >= currentMonth ? now.getFullYear() : now.getFullYear() + 1;
 }
 
 
@@ -42,10 +43,20 @@ function getTitleNumbers(str) {
 
 
 
+function removeEmojis(srt) {
+	const regex = /\p{Extended_Pictographic}/ug;
+	return srt.replace(regex, '').replaceAll('\n', '.');
+}
+
+
+
+
+
 export {
 	initContent,
 	getCurrentYear,
 	getTwoDigitNumber,
 	getCalendarUri,
-	getTitleNumbers
+	getTitleNumbers,
+	removeEmojis
 };
