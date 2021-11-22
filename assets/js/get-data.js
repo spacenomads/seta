@@ -1,4 +1,5 @@
-import {MONTHS, SENTENCE, MONTH_REGEX, EVENTS_REGEX, SINGLE_EVENT_REGEX, MONTH_DIVIDER_CHAR, EVENTS_DIVIDER_CHAR} from './vars.js';
+import {
+	MONTHS, SENTENCE, MONTH_REGEX, EVENTS_REGEX, SINGLE_EVENT_DAY_REGEX, SINGLE_EVENT_TITLE_REGEX, MONTH_DIVIDER_CHAR, EVENTS_DIVIDER_CHAR } from './vars.js';
 import { getCurrentYear, removeEmojis} from './helpers.js';
 
 
@@ -38,11 +39,21 @@ function splitEvents(str) {
 		.split(':')[1]
 		.split(EVENTS_DIVIDER_CHAR)
 		.map(event => {
-			const {day, title, guest} = event.match(SINGLE_EVENT_REGEX).groups;
+			let clonedEvent = event.trim();
+			const hasDay = SINGLE_EVENT_DAY_REGEX.test(clonedEvent);
+			const [day] = hasDay ? clonedEvent.match(SINGLE_EVENT_DAY_REGEX) : 'DIA';
+			clonedEvent = clonedEvent
+				.replace(day, '')
+				.trim();
+			const hasTitle = SINGLE_EVENT_TITLE_REGEX.test(clonedEvent);
+			const title = hasTitle ? clonedEvent.match(SINGLE_EVENT_TITLE_REGEX).groups.title : 'TITLE';
+			clonedEvent = clonedEvent
+				.replace(title, '')
+				.trim();
 			return {
 				day,
 				title,
-				guest
+				guest: clonedEvent
 			};
 		});
 }
@@ -65,6 +76,7 @@ function getEventsData(content) {
 	const message = cleanMessage( removeEmojis(content) );
 	return message
 		.split(MONTH_DIVIDER_CHAR)
+		.filter(Boolean)
 		.map(events => {
 			const month = getMonthFromStrEvent(events);
 			const year = getCurrentYear(month);
